@@ -3,23 +3,45 @@ spring:
     active: dev
 ---
 server:
-  port: 8001
+  port: 8002
 spring:
   application:
-    name: PLAT-SERVICE
+    name: PRODUCT-SERVICE
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/aigou
+      username: root
+      password: 123456
   profiles: dev
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka/
+feign:
+  hystrix:
+    enabled: true
+mybatis-plus:
+  mapper-locations: classpath:cn/itsource/aigou/mapper/*Mapper.xml
+  type-aliases-package: cn.itsource.aigou.domain,cn.itsource.aigou.query
 ---
 server:
-  port: 8002
+  port: 8003
 spring:
   application:
-    name: PLAT-SERVICE-TEST
+    name: PRODUCT-SERVICE-TEST
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/aigou_test
+      username: root
+      password: 123456
   profiles: test
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka/
+feign:
+  hystrix:
+    enabled: true
+mybatis-plus:
+  mapper-locations: classpath:cn/itsource/aigou/mapper/*Mapper.xml
+  type-aliases-package: cn.itsource.aigou.domain,cn.itsource.aigou.query
